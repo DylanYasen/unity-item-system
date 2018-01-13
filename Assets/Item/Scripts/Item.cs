@@ -26,6 +26,7 @@ namespace uItem
         public Sprite icon;
 
         [Header("[Property]")]
+        [EnumFlags]
         public ItemProperty properties; // @todo: draw enum flag UI
         //public Modifier[] modifiers;
     }
