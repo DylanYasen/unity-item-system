@@ -1,0 +1,567 @@
+fileFormatVersion: 2
+guid: b58e1a2aa0e5f3647a2e8f517d5e4199
+timeCreated: 1514654104
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: 1
+    21300002: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_1
+    21300004: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_2
+    21300006: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_3
+    21300008: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_4
+    21300010: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_5
+    21300012: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_6
+    21300014: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_7
+    21300016: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_8
+    21300018: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_9
+    21300020: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_10
+    21300022: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_11
+    21300024: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_12
+    21300026: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_13
+    21300028: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_14
+    21300030: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_15
+    21300032: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_16
+    21300034: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_17
+    21300036: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_18
+    21300038: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_19
+    21300040: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_20
+    21300042: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_21
+    21300044: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_22
+    21300046: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_23
+    21300048: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_24
+    21300050: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_25
+    21300052: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_26
+    21300054: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_27
+    21300056: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_28
+    21300058: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_29
+    21300060: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_30
+    21300062: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_31
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 350
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 350
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 350
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 350
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_5
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 300
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_6
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 300
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_7
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 300
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 250
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_9
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 250
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_10
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 250
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_11
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 250
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_13
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_14
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_15
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_17
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_18
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_19
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_21
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_22
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_23
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_25
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_26
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_27
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_29
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_30
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pixel___ice_cream_icon_f2u_by_yesirukey_dagybxw_by_yesirukey-dagydgg_31
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
