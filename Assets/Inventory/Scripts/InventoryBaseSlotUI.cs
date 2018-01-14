@@ -18,18 +18,21 @@ namespace uInventory
 
         protected InventoryBaseSlot slot;
 
-        public Image BackgroundImage { get; private set; }
-        public Image ItemImage { get; private set; }
+        public Image BackgroundImage;
+        public Image ItemImage;
 
         protected virtual void Awake()
         {
-            BackgroundImage = GetComponent<Image>();
-            ItemImage = gameObject.transform.Find("ItemImage").GetComponent<Image>();
-
             Assert.IsNotNull(BackgroundImage, "Inventory slot doesn't have a image component");
             Assert.IsNotNull(ItemImage, "Inventory slot doesn't have a child component called 'ItemImage' with image component");
 
             ItemImage.enabled = false;
+        }
+
+        protected virtual void OnEnable()
+        {
+            // @todo: better to set before becoming visiable
+            UpdateUI(slot.Item, slot.ItemAmount);
         }
 
         public virtual void SetSlot(InventoryBaseSlot slot)
