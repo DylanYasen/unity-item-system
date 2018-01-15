@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
+using UnityEngine;
 
 namespace uItem
 {
@@ -17,15 +17,17 @@ namespace uItem
         }
 
         public bool IsStackable { get { return (properties & ItemProperty.Stackable) != 0; } }
+        public bool IsPurchaseable { get { return (properties & ItemProperty.Purchasable) != 0; } }
+        public bool IsSellable { get { return (properties & ItemProperty.Sellable) != 0; } }
 
-        [Header("[Info]")]
+        [Header ("[Info]")]
         public string description;
         public GameObject lootPrefab;
 
-        [Header("[UI]")]
+        [Header ("[UI]")]
         public Sprite icon;
 
-        [Header("[Property]")]
+        [Header ("[Property]")]
         [EnumFlags]
         public ItemProperty properties; // @todo: draw enum flag UI
         //public Modifier[] modifiers;
