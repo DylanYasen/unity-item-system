@@ -29,6 +29,18 @@ namespace uInventory
             return true;
         }
 
+        public virtual void StackItem (int amt)
+        {
+            this.ItemAmount += amt;
+
+            OnItemChanged (Item, ItemAmount);
+        }
+
+        public virtual bool HasItem (Item item)
+        {
+            return (ContainsItem && Item.name == item.name);
+        }
+
         public virtual int RemoveItem (int amt = 1)
         {
             Assert.IsTrue (ItemAmount > 0, "no items in the slot to remove");
