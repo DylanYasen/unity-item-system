@@ -128,14 +128,10 @@ namespace uInventory
             for (int i = 0; i < ItemSlots.Length; i++)
             {
                 InventoryItemSlot slot = ItemSlots[i];
-                if (slot.ContainsItem)
+                if (slot.HasItem (newItem))
                 {
-                    if (slot.Item.name == newItem.name)
-                    {
-                        // @todo: stack items
-                        OnItemAdded (newItem, amount);
-                        return true;
-                    }
+                    slot.StackItem (amount);
+                    return true;
                 }
             }
 
