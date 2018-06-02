@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
+using UnityEngine;
 
 namespace uItem
 {
-    public class Item : ScriptableObject
+    public class ItemTemplate : ScriptableObject
     {
         [Flags]
         public enum ItemProperty
@@ -18,15 +18,39 @@ namespace uItem
 
         public bool IsStackable { get { return (properties & ItemProperty.Stackable) != 0; } }
 
-        [Header("[Info]")]
+        [Header ("[Info]")]
         public string description;
         public GameObject lootPrefab;
 
-        [Header("[UI]")]
+        [Header ("[UI]")]
         public Sprite icon;
 
-        [Header("[Property]")]
+        [Header ("[Property]")]
         public ItemProperty properties; // @todo: draw enum flag UI
         //public Modifier[] modifiers;
     }
+
+    public struct ItemInstance
+    {
+        public ItemTemplate Template;
+        public int Amount;
+
+        public ItemInstance (ItemTemplate template, int amount)
+        {
+            Template = template;
+            Amount = amount;
+        }
+
+        public bool IsEmpty ()
+        {
+            return Template != null || Amount < 1;
+        }
+
+        public void Clear ()
+        {
+            Template = null;
+            Amount = 0;
+        }
+    }
+
 }

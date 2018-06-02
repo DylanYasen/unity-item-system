@@ -7,8 +7,8 @@ namespace uInventory
 {
     public class InventoryUIManager : MonoBehaviour
     {
-        public bool IsDraggingItem { get { return DraggedItem != null; } }
-        public Item DraggedItem { get; private set; }
+        public bool IsDraggingItem { get { return !DraggedItem.IsEmpty(); } }
+        public ItemInstance DraggedItem { get; private set; }
         public InventoryBaseSlot DraggedSlot { get; private set; }
 
         [Header("[UI]")]
@@ -31,15 +31,15 @@ namespace uInventory
 
             draggedSlot.SetItem(null);
 
-            dragItemImage.sprite = DraggedItem.icon;
+            dragItemImage.sprite = DraggedItem.Template.icon;
             dragItemImage.enabled = true;
         }
 
         public void PutDraggedItem(InventoryBaseSlot slot)
         {
-            if (slot.SetItem(DraggedItem))
+            if (slot.SetItem(DraggedItem.Template, DraggedItem.Amount))
             {
-                DraggedItem = null;
+                DraggedItem.Clear();
                 DraggedSlot = null;
                 dragItemImage.enabled = false;
             }

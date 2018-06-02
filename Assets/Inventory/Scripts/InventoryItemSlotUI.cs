@@ -24,15 +24,15 @@ namespace uInventory
             base.SetSlot(inSlot);
         }
 
-        protected override void UpdateUI(Item item, int amount)
+        protected override void UpdateUI(ItemInstance item)
         {
-            base.UpdateUI(item, amount);
+            base.UpdateUI(item);
 
-            if (item != null)
+            if (item.Template != null)
             {
-                if (item.IsStackable && amount > 1)
+                if (item.Template.IsStackable && item.Amount > 1)
                 {
-                    ItemAmountText.text = amount.ToString();
+                    ItemAmountText.text = item.Amount.ToString();
                     ItemAmountText.enabled = true;
                 }
             }

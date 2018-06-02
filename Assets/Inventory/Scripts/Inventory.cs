@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine.Assertions;
 using uItem;
+using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 namespace uInventory
 {
@@ -12,13 +12,13 @@ namespace uInventory
         public InventoryItemSlot[] ItemSlots { get; private set; }
         public int SlotCount { get; private set; }
 
-        public delegate void ItemChangedDelegate(Item item, int amount);
+        public delegate void ItemChangedDelegate (ItemInstance itemInstance);
         public event ItemChangedDelegate OnItemAdded = delegate { };
 
         private GameObject owner;
         private ItemDatabase itemDatabase;
 
-        public Inventory(GameObject inOwner, ItemDatabase inItemDatabase, int slotCount)
+        public Inventory (GameObject inOwner, ItemDatabase inItemDatabase, int slotCount)
         {
             this.owner = inOwner;
             this.SlotCount = slotCount;
@@ -28,33 +28,51 @@ namespace uInventory
             ItemSlots = new InventoryItemSlot[slotCount];
             for (int i = 0; i < slotCount; i++)
             {
-                ItemSlots[i] = new InventoryItemSlot(this);
+                ItemSlots[i] = new InventoryItemSlot (this);
             }
         }
 
-        [System.Obsolete("Use AddItem instead")]
-        public void AddItemByID(int id)
+        [System.Obsolete ("Use AddItem instead")]
+        public void AddItemByID (int id)
         {
             //@deprecated
         }
 
-        public void AddItem(string name, int amount = 1)
+        public void AddItem (string name, int amount = 1)
         {
-            Item item = itemDatabase.GetItemByName(name);
-            if (item != null)
+            ItemTemplate itemTemplate = itemDatabase.GetItemByName (name);
+            if (itemTemplate != null)
             {
-                AddItem(ScriptableObject.Instantiate(item), amount);
+                ItemInstance itemInstance;
+                itemInstance.Template = itemTemplate;
+                itemInstance.Amount = amount;
+
+                // AddItem(ScriptableObject.Instantiate(item), amount);
+                AddItemInstance (itemInstance);
             }
         }
 
-        public void AddItem(Item item, int amount = 1)
+        public void AddItem (ItemTemplate itemTemplate, int amount = 1)
         {
-            bool stacked = StackItem(item, amount);
+            if (itemTemplate != null)
+            {
+                ItemInstance itemInstance;
+                itemInstance.Template = itemTemplate;
+                itemInstance.Amount = amount;
+
+                // AddItem(ScriptableObject.Instantiate(item), amount);
+                AddItemInstance (itemInstance);
+            }
+        }
+
+        public void AddItemInstance (ItemInstance itemInstance)
+        {
+            bool stacked = StackItem (itemInstance);
             if (!stacked)
             {
-                bool added = AddNewItem(item, amount);
-                if (added)
-                {
+                bool added = AddNewItem (itemInstance);
+                if (added) { 
+                    
                 }
                 else
                 {
@@ -63,17 +81,19 @@ namespace uInventory
             }
         }
 
-        public void RemoveAllItems()
+        public void RemoveAllItems ()
         {
             foreach (var slot in ItemSlots)
             {
-                slot.SetItem(null);
+                slot.SetItem (null);
             }
         }
 
-        private bool StackItem(Item newItem, int amount)
+        private bool StackItem (ItemInstance newItem)
         {
-            if (!newItem.IsStackable)
+            ItemTemplate itemTemplate = newItem.Template;
+
+            if (!itemTemplate.IsStackable)
             {
                 return false;
             }
@@ -83,10 +103,10 @@ namespace uInventory
                 InventoryItemSlot slot = ItemSlots[i];
                 if (slot.ContainsItem)
                 {
-                    if (slot.Item.name == newItem.name)
+                    if (slot.Item.Template == itemTemplate)
                     {
                         // @todo: stack items
-                        OnItemAdded(newItem, amount);
+                        OnItemAdded (newItem);
                         return true;
                     }
                 }
@@ -95,19 +115,21 @@ namespace uInventory
             return false;
         }
 
-        private bool AddNewItem(Item newItem, int amount)
+        private bool AddNewItem (ItemInstance newItem)
         {
+            ItemTemplate itemTemplate = newItem.Template;
+
             for (int i = 0; i < ItemSlots.Length; i++)
             {
                 InventoryItemSlot slot = ItemSlots[i];
 
                 if (!slot.ContainsItem)
                 {
-                    slot.SetItem(newItem, amount);
+                    slot.SetItemInstance (newItem);
 
                     // @todo: auto equip
 
-                    OnItemAdded(newItem, amount);
+                    OnItemAdded (newItem);
                     return true;
                 }
             }

@@ -7,14 +7,14 @@ public class ItemEditor : EditorWindow
     [MenuItem("ItemSystem/NewItem")]
     public static void CreateNewItem()
     {
-        AssetUtility.CreateAsset<Item>("Items");
+        AssetUtility.CreateAsset<ItemTemplate>("Items");
     }
 
     [OnOpenAsset(0)]
     public static bool LoadItem(int instanceId, int line)
     {
         var obj = EditorUtility.InstanceIDToObject(instanceId);
-        if (obj is Item)
+        if (obj is ItemTemplate)
         {
             ItemEditor editor = GetWindow<ItemEditor>();
             editor.Show();

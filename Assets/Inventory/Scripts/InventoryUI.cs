@@ -71,7 +71,7 @@ namespace uInventory
                 // swap item with dragged slot
                 if (slot.ContainsItem)
                 {
-                    inventoryManager.DraggedSlot.SetItem(slot.Item);
+                    inventoryManager.DraggedSlot.SetItemInstance(slot.Item);
                 }
 
                 inventoryManager.PutDraggedItem(slot);

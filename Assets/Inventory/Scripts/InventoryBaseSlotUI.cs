@@ -26,7 +26,7 @@ namespace uInventory
             BackgroundImage = GetComponent<Image>();
             ItemImage = gameObject.transform.Find("ItemImage").GetComponent<Image>();
 
-            Assert.IsNotNull(BackgroundImage, "Inventory slot doesn't have a image component");
+            Assert.IsNotNull(BackgroundImage, "Inventory slot doesn't have an image component");
             Assert.IsNotNull(ItemImage, "Inventory slot doesn't have a child component called 'ItemImage' with image component");
 
             ItemImage.enabled = false;
@@ -40,11 +40,11 @@ namespace uInventory
             this.slot.OnItemChanged += UpdateUI;
         }
 
-        protected virtual void UpdateUI(Item item, int amount)
+        protected virtual void UpdateUI(ItemInstance Item)
         {
-            if (item != null)
+            if (Item.Template != null)
             {
-                ItemImage.sprite = item.icon;
+                ItemImage.sprite = Item.Template.icon;
                 ItemImage.enabled = true;
             }
             else

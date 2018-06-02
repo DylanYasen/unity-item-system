@@ -1,29 +1,39 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using uItem;
+using UnityEngine;
 
 namespace uInventory
 {
     public abstract class InventoryBaseSlot
     {
-        public bool ContainsItem { get { return Item != null; } }
-        public Item Item { get; protected set; }
-        public int ItemAmount { get; private set; }
+        public bool ContainsItem { get { return ItemInstance.Template != null || ItemInstance.Amount < 1; } }
+        public ItemInstance Item { get { return ItemInstance; } }
         public Inventory OwningInventory { get; private set; }
 
         public event Inventory.ItemChangedDelegate OnItemChanged = delegate { };
 
-        public InventoryBaseSlot(Inventory inventory)
+        protected ItemInstance ItemInstance; // { get; protected set; }
+
+        public InventoryBaseSlot (Inventory inventory)
         {
             OwningInventory = inventory;
         }
 
-        public virtual bool SetItem(Item item, int amount = 0)
+        public virtual bool SetItem (ItemTemplate itemTemplate, int amount = 0)
         {
-            this.Item = item;
-            this.ItemAmount = amount;
+            ItemInstance.Template = itemTemplate;
+            ItemInstance.Amount = amount;
 
-            OnItemChanged(item, amount);
+            OnItemChanged (ItemInstance);
+
+            return true;
+        }
+
+        public virtual bool SetItemInstance (ItemInstance itemInstance)
+        {
+            ItemInstance = itemInstance;
+
+            OnItemChanged (ItemInstance);
 
             return true;
         }
