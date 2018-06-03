@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace uItem
 {
+    [CreateAssetMenu]
     public class ItemTemplate : ScriptableObject
     {
         [Flags]
@@ -33,27 +34,6 @@ namespace uItem
         //public Modifier[] modifiers;
     }
 
-    public struct ItemInstance
-    {
-        public ItemTemplate Template;
-        public int Amount;
-
-        public ItemInstance (ItemTemplate template, int amount)
-        {
-            Template = template;
-            Amount = amount;
-        }
-
-        public bool IsEmpty ()
-        {
-            return Template != null || Amount < 1;
-        }
-
-        public void Clear ()
-        {
-            Template = null;
-            Amount = 0;
-        }
-    }
+   
 
 }

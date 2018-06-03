@@ -19,20 +19,22 @@ namespace uItem
         {
             ItemRegistry = new Dictionary<string, ItemTemplate>();
 
-            ItemTemplate[] items = Resources.LoadAll<ItemTemplate>("items");
+            ItemTemplate[] items = Resources.LoadAll<ItemTemplate>("Items");
             for (int i = 0; i < items.Length; i++)
             {
                 ItemTemplate item = items[i];
                 if (!ItemRegistry.ContainsKey(item.name))
                 {
+                    Debug.Log(item.name);
                     ItemRegistry.Add (item.name, item);
                 }
             }
+            
         }
 
         public ItemTemplate GetItemByName(string itemName)
         {
-            Assert.IsTrue (ItemRegistry.ContainsKey (itemName), string.Format ("item database doesn't have the requested item: %s\n ", itemName));
+            Assert.IsTrue (ItemRegistry.ContainsKey (itemName), string.Format ("item database doesn't have the requested item: {0}\n ", itemName));
             return ItemRegistry[itemName];
         }
 
