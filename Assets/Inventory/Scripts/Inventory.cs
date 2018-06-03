@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using uItem;
 using UnityEngine;
@@ -71,14 +72,34 @@ namespace uInventory
             if (!stacked)
             {
                 bool added = AddNewItem (itemInstance);
-                if (added) { 
-                    
-                }
-                else
+                if (added)
                 {
-                    // @todo: notify failed to add
+
                 }
             }
+        }
+
+        public bool RemoveItems (ItemInstance itemInstance)
+        {
+            if (!HasItem (itemInstance))
+            {
+                Debug.LogErrorFormat ("don't have %d $s to remove", itemInstance.Amount, itemInstance.Template.name);
+                return false;
+            }
+
+            InventoryBaseSlot[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && slot.Item.Template.name == itemInstance.Template.name);
+
+            int amtRemainingToRemove = itemInstance.Amount;
+            foreach (var slot in slots)
+            {
+                int removedAmt = slot.RemoveItem (amtRemainingToRemove);
+                amtRemainingToRemove -= removedAmt;
+                if (amtRemainingToRemove == 0)
+                {
+                    break;
+                }
+            }
+            return true;
         }
 
         public void RemoveAllItems ()
@@ -87,6 +108,29 @@ namespace uInventory
             {
                 slot.SetItem (null);
             }
+        }
+
+        public void FindAllItems (List<ItemInstance> items, System.Predicate<ItemInstance> predicate)
+        {
+            InventoryBaseSlot[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && predicate (slot.Item));
+
+            foreach (var slot in slots)
+            {
+                items.Add (slot.Item);
+            }
+        }
+
+        public bool HasItem (ItemInstance itemInstance)
+        {
+            ItemTemplate itemTemplate = itemInstance.Template;
+            InventoryBaseSlot[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && slot.Item.Template.name == itemTemplate.name);
+            int availableAmt = 0;
+            foreach (var slot in slots)
+            {
+                availableAmt += slot.Item.Amount;
+            }
+
+            return availableAmt >= itemInstance.Amount;
         }
 
         private bool StackItem (ItemInstance newItem)
@@ -101,11 +145,12 @@ namespace uInventory
             for (int i = 0; i < ItemSlots.Length; i++)
             {
                 InventoryItemSlot slot = ItemSlots[i];
-                if (slot.ContainsItem)
+                if (slot.HasItem (newItem.Template))
                 {
                     if (slot.Item.Template == itemTemplate)
                     {
                         // @todo: stack items
+                        //  slot.StackItem (amount);
                         OnItemAdded (newItem);
                         return true;
                     }

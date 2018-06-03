@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace uItem
@@ -9,12 +10,12 @@ namespace uItem
     {
         public Dictionary<string, ItemTemplate> ItemRegistry { get; private set; }
 
-        void Awake()
+        void Awake ()
         {
-            LoadItems();
+            LoadItems ();
         }
 
-        public void LoadItems()
+        public void LoadItems ()
         {
             ItemRegistry = new Dictionary<string, ItemTemplate>();
 
@@ -24,15 +25,23 @@ namespace uItem
                 ItemTemplate item = items[i];
                 if (!ItemRegistry.ContainsKey(item.name))
                 {
-                    ItemRegistry.Add(item.name, item);
+                    ItemRegistry.Add (item.name, item);
                 }
             }
         }
 
         public ItemTemplate GetItemByName(string itemName)
         {
-            Assert.IsTrue(ItemRegistry.ContainsKey(itemName), string.Format("item database doesn't have the requested item: %s\n ", itemName));
+            Assert.IsTrue (ItemRegistry.ContainsKey (itemName), string.Format ("item database doesn't have the requested item: %s\n ", itemName));
             return ItemRegistry[itemName];
         }
+
+        // public Item[] FindAllItems (System.Predicate<Item> predicate)
+        // {
+        //     Item[] matches = ItemRegistry.Where (pair => predicate (pair.Value))
+        //         .Select (pair => pair.Value).ToArray();
+
+        //     return matches;
+        // }
     }
 }

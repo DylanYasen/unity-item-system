@@ -7,16 +7,13 @@ namespace uInventory
 {
     public class InventoryItemSlotUI : InventoryBaseSlotUI
     {
-        public Text ItemAmountText { get; private set; }
+        public Text ItemAmountText;
 
         protected override void Awake()
         {
             base.Awake();
 
-            ItemAmountText = gameObject.transform.Find("ItemAmountText").GetComponent<Text>();
             Assert.IsNotNull(ItemAmountText, "Inventory item slot doesn't have a child component called 'ItemAmountText' with text component");
-
-            ItemAmountText.enabled = false;
         }
 
         public override void SetSlot(InventoryBaseSlot inSlot)

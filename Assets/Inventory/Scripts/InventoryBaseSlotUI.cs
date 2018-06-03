@@ -1,15 +1,15 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+﻿using uItem;
+using UnityEngine;
 using UnityEngine.Assertions;
-using uItem;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace uInventory
 {
-    [RequireComponent(typeof(Image))]
+    [RequireComponent (typeof (Image))]
     public abstract class InventoryBaseSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler
     {
-        public delegate void SlotInteractionDelegate(InventoryBaseSlot slot);
+        public delegate void SlotInteractionDelegate (InventoryBaseSlot slot);
         public event SlotInteractionDelegate OnLeftClickSlot = delegate { };
         public event SlotInteractionDelegate OnRightClickSlot = delegate { };
         public event SlotInteractionDelegate OnMouseEnterSlot = delegate { };
@@ -18,10 +18,10 @@ namespace uInventory
 
         protected InventoryBaseSlot slot;
 
-        public Image BackgroundImage { get; private set; }
-        public Image ItemImage { get; private set; }
+        public Image BackgroundImage;
+        public Image ItemImage;
 
-        protected virtual void Awake()
+        protected virtual void Awake ()
         {
             BackgroundImage = GetComponent<Image>();
             ItemImage = gameObject.transform.Find("ItemImage").GetComponent<Image>();
@@ -32,9 +32,18 @@ namespace uInventory
             ItemImage.enabled = false;
         }
 
-        public virtual void SetSlot(InventoryBaseSlot slot)
+        protected virtual void OnEnable ()
         {
-            Assert.IsNotNull(slot, "null inventory slot model is passed to inventory slot ui");
+            // @todo: better to set before becoming visiable
+            if (slot != null)
+            {
+                UpdateUI (slot.Item);
+            }
+        }
+
+        public virtual void SetSlot (InventoryBaseSlot slot)
+        {
+            Assert.IsNotNull (slot, "null inventory slot model is passed to inventory slot ui");
 
             this.slot = slot;
             this.slot.OnItemChanged += UpdateUI;
@@ -54,34 +63,34 @@ namespace uInventory
             }
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerDown (PointerEventData eventData)
         {
             if (slot == null) { return; }
 
             PointerEventData.InputButton button = eventData.button;
             if (button == PointerEventData.InputButton.Left)
             {
-                OnLeftClickSlot(slot);
+                OnLeftClickSlot (slot);
             }
             else if (button == PointerEventData.InputButton.Right)
             {
-                OnRightClickSlot(slot);
+                OnRightClickSlot (slot);
             }
         }
 
-        public virtual void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter (PointerEventData eventData)
         {
-            OnMouseEnterSlot(slot);
+            OnMouseEnterSlot (slot);
         }
 
-        public virtual void OnPointerExit(PointerEventData eventData)
+        public virtual void OnPointerExit (PointerEventData eventData)
         {
-            OnMouseExitSlot(slot);
+            OnMouseExitSlot (slot);
         }
 
-        public virtual void OnDrag(PointerEventData eventData)
+        public virtual void OnDrag (PointerEventData eventData)
         {
-            OnMouseDragSlot(slot);
+            OnMouseDragSlot (slot);
         }
     }
 }

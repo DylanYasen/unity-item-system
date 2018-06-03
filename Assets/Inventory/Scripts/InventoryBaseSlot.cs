@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using uItem;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace uInventory
 {
     public abstract class InventoryBaseSlot
     {
-        public bool ContainsItem { get { return ItemInstance.Template != null || ItemInstance.Amount < 1; } }
-        public ItemInstance Item { get { return ItemInstance; } }
+        public bool ContainsItem { get { return itemInstance.Template != null || itemInstance.Amount < 1; } }
+        public ItemInstance Item { get { return itemInstance; } }
         public Inventory OwningInventory { get; private set; }
 
         public event Inventory.ItemChangedDelegate OnItemChanged = delegate { };
 
-        protected ItemInstance ItemInstance; // { get; protected set; }
+        protected ItemInstance itemInstance; // { get; protected set; }
 
         public InventoryBaseSlot (Inventory inventory)
         {
@@ -21,22 +22,52 @@ namespace uInventory
 
         public virtual bool SetItem (ItemTemplate itemTemplate, int amount = 0)
         {
-            ItemInstance.Template = itemTemplate;
-            ItemInstance.Amount = amount;
+            itemInstance.Template = itemTemplate;
+            itemInstance.Amount = amount;
 
-            OnItemChanged (ItemInstance);
+            OnItemChanged (itemInstance);
 
             return true;
         }
+
+        // public virtual bool SetItem (Item item, int amount = 0)
 
         public virtual bool SetItemInstance (ItemInstance itemInstance)
         {
-            ItemInstance = itemInstance;
+            this.itemInstance = itemInstance;
+            OnItemChanged (this.itemInstance);
 
-            OnItemChanged (ItemInstance);
+            //@todo: handle stack full
 
             return true;
         }
 
+        public virtual void StackItem (int amt)
+        {
+            itemInstance.Amount += amt;
+
+            OnItemChanged (itemInstance);
+        }
+
+        public virtual bool HasItem (ItemTemplate template)
+        {
+            return (ContainsItem && Item.Template == template);
+        }
+
+        public virtual int RemoveItem (int amt = 1)
+        {
+            Assert.IsTrue (itemInstance.Amount > 0, "no items in the slot to remove");
+
+            int availableToRemove = itemInstance.Amount;
+
+            itemInstance.Amount -= amt;
+            if (itemInstance.Amount < 1)
+            {
+                itemInstance.Clear();
+            }
+            OnItemChanged (itemInstance);
+
+            return availableToRemove;
+        }
     }
 }
