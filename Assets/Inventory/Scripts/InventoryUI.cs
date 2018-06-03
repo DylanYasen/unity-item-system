@@ -68,8 +68,8 @@ namespace uInventory
 
             if (inventoryManager.IsDraggingItem)
             {
-                // swap item with dragged slot
-                if (slot.ContainsItem)
+                // swap item with dragged slot if they are different items. otherwise, we might be able to stack them
+                if (slot.ContainsItem && slot.Item.Template != inventoryManager.DraggedItem.Template)
                 {
                     inventoryManager.DraggedSlot.SetItemInstance(slot.Item);
                 }

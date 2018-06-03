@@ -8,12 +8,12 @@ namespace uInventory
     public class InventoryUIManager : MonoBehaviour
     {
         public bool IsDraggingItem { get { return !DraggedItem.IsEmpty(); } }
-        public ItemInstance DraggedItem { get; private set; }
         public InventoryBaseSlot DraggedSlot { get; private set; }
 
         [Header("[UI]")]
         public Image dragItemImage;
 
+        public ItemInstance DraggedItem; 
         private Canvas canvas;
 
         private void Awake()
@@ -37,7 +37,7 @@ namespace uInventory
 
         public void PutDraggedItem(InventoryBaseSlot slot)
         {
-            if (slot.SetItem(DraggedItem.Template, DraggedItem.Amount))
+            if (slot.SetItemInstance(DraggedItem))
             {
                 DraggedItem.Clear();
                 DraggedSlot = null;

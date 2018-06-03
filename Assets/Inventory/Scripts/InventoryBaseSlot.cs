@@ -7,7 +7,7 @@ namespace uInventory
 {
     public abstract class InventoryBaseSlot
     {
-        public bool ContainsItem { get { return itemInstance.Template != null || itemInstance.Amount < 1; } }
+        public bool ContainsItem { get { return itemInstance.Template != null && itemInstance.Amount > 0; } }
         public ItemInstance Item { get { return itemInstance; } }
         public Inventory OwningInventory { get; private set; }
 
@@ -34,16 +34,22 @@ namespace uInventory
 
         public virtual bool SetItemInstance (ItemInstance itemInstance)
         {
+            ItemTemplate template = itemInstance.Template;
+            if(template == Item.Template && template.IsStackable)
+            {
+                StackItem(itemInstance.Amount);
+                return true;
+            }
+
             this.itemInstance = itemInstance;
             OnItemChanged (this.itemInstance);
-
-            //@todo: handle stack full
 
             return true;
         }
 
         public virtual void StackItem (int amt)
         {
+            // @todo: handle overflow
             itemInstance.Amount += amt;
 
             OnItemChanged (itemInstance);
