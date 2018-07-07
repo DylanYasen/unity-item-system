@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace uItem
 {
-    public struct ItemInstance
+    public class ItemInstance
     {
         public ItemTemplate Template;
         public int Amount;

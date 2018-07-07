@@ -44,9 +44,7 @@ namespace uInventory
             ItemTemplate itemTemplate = itemDatabase.GetItemByName (name);
             if (itemTemplate != null)
             {
-                ItemInstance itemInstance;
-                itemInstance.Template = itemTemplate;
-                itemInstance.Amount = amount;
+                ItemInstance itemInstance = new ItemInstance(itemTemplate, amount);
 
                 // AddItem(ScriptableObject.Instantiate(item), amount);
                 AddItemInstance (itemInstance);
@@ -57,11 +55,7 @@ namespace uInventory
         {
             if (itemTemplate != null)
             {
-                ItemInstance itemInstance;
-                itemInstance.Template = itemTemplate;
-                itemInstance.Amount = amount;
-
-                // AddItem(ScriptableObject.Instantiate(item), amount);
+                ItemInstance itemInstance = new ItemInstance(itemTemplate, amount);
                 AddItemInstance (itemInstance);
             }
         }
