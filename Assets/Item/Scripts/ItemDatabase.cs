@@ -6,44 +6,44 @@ using UnityEngine.Assertions;
 
 namespace uItem
 {
-    public class ItemDatabase : MonoBehaviour
+    public class ItemDatabase<T> : MonoBehaviour where T : ItemTemplate
     {
-        public Dictionary<string, ItemTemplate> ItemRegistry { get; private set; }
+        public string ItemAssetsRootPath = "Items";
+        public Dictionary<string, T> ItemRegistry { get; private set; }
 
-        void Awake ()
+        protected void Awake ()
         {
             LoadItems ();
         }
 
         public void LoadItems ()
         {
-            ItemRegistry = new Dictionary<string, ItemTemplate>();
+            ItemRegistry = new Dictionary<string, T> ();
 
-            ItemTemplate[] items = Resources.LoadAll<ItemTemplate>("Items");
+            T[] items = Resources.LoadAll<T> (ItemAssetsRootPath);
             for (int i = 0; i < items.Length; i++)
             {
-                ItemTemplate item = items[i];
-                if (!ItemRegistry.ContainsKey(item.name))
+                T item = items[i];
+                if (!ItemRegistry.ContainsKey (item.name))
                 {
-                    Debug.Log(item.name);
+                    Debug.Log (item.name);
                     ItemRegistry.Add (item.name, item);
                 }
             }
-            
         }
 
-        public ItemTemplate GetItemByName(string itemName)
+        public T GetItemByName (string itemName)
         {
             Assert.IsTrue (ItemRegistry.ContainsKey (itemName), string.Format ("item database doesn't have the requested item: {0}\n ", itemName));
             return ItemRegistry[itemName];
         }
 
-        // public Item[] FindAllItems (System.Predicate<Item> predicate)
-        // {
-        //     Item[] matches = ItemRegistry.Where (pair => predicate (pair.Value))
-        //         .Select (pair => pair.Value).ToArray();
+        public T[] FindAllItems (System.Predicate<T> predicate)
+        {
+            T[] matches = ItemRegistry.Where (pair => predicate (pair.Value))
+                .Select (pair => pair.Value).ToArray ();
 
-        //     return matches;
-        // }
+            return matches;
+        }
     }
 }

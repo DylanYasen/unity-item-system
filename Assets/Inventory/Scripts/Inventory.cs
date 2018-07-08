@@ -8,28 +8,30 @@ using UnityEngine.UI;
 
 namespace uInventory
 {
-    public class Inventory
+    public class Inventory<TTemplate, TInstance>
+        where TTemplate : ItemTemplate, new ()
+    where TInstance : ItemInstance<TTemplate>, new ()
     {
-        public InventoryItemSlot[] ItemSlots { get; private set; }
+        public InventoryItemSlot<TTemplate, TInstance>[] ItemSlots { get; private set; }
         public int SlotCount { get; private set; }
 
-        public delegate void ItemChangedDelegate (ItemInstance itemInstance);
+        public delegate void ItemChangedDelegate (TInstance itemInstance);
         public event ItemChangedDelegate OnItemAdded = delegate { };
 
         private GameObject owner;
-        private ItemDatabase itemDatabase;
+        private ItemDatabase<TTemplate> itemDatabase;
 
-        public Inventory (GameObject inOwner, ItemDatabase inItemDatabase, int slotCount)
+        public Inventory (GameObject inOwner, ItemDatabase<TTemplate> inItemDatabase, int slotCount)
         {
             this.owner = inOwner;
             this.SlotCount = slotCount;
             this.itemDatabase = inItemDatabase;
 
             // initialize item slots
-            ItemSlots = new InventoryItemSlot[slotCount];
+            ItemSlots = new InventoryItemSlot<TTemplate, TInstance>[slotCount];
             for (int i = 0; i < slotCount; i++)
             {
-                ItemSlots[i] = new InventoryItemSlot (this);
+                ItemSlots[i] = new InventoryItemSlot<TTemplate, TInstance> (this);
             }
         }
 
@@ -41,26 +43,29 @@ namespace uInventory
 
         public void AddItem (string name, int amount = 1)
         {
-            ItemTemplate itemTemplate = itemDatabase.GetItemByName (name);
+            TTemplate itemTemplate = itemDatabase.GetItemByName (name);
+            Debug.Log (itemTemplate);
             if (itemTemplate != null)
             {
-                ItemInstance itemInstance = new ItemInstance(itemTemplate, amount);
-
-                // AddItem(ScriptableObject.Instantiate(item), amount);
+                TInstance itemInstance = new TInstance ();
+                itemInstance.Template = itemTemplate;
+                itemInstance.Amount = amount;
                 AddItemInstance (itemInstance);
             }
         }
 
-        public void AddItem (ItemTemplate itemTemplate, int amount = 1)
+        public void AddItem (TTemplate itemTemplate, int amount = 1)
         {
             if (itemTemplate != null)
             {
-                ItemInstance itemInstance = new ItemInstance(itemTemplate, amount);
+                TInstance itemInstance = new TInstance ();
+                itemInstance.Template = itemTemplate;
+                itemInstance.Amount = amount;
                 AddItemInstance (itemInstance);
             }
         }
 
-        public void AddItemInstance (ItemInstance itemInstance)
+        public void AddItemInstance (TInstance itemInstance)
         {
             bool stacked = StackItem (itemInstance);
             if (!stacked)
@@ -73,7 +78,7 @@ namespace uInventory
             }
         }
 
-        public bool RemoveItems (ItemInstance itemInstance)
+        public bool RemoveItems (TInstance itemInstance)
         {
             if (!HasItem (itemInstance))
             {
@@ -81,7 +86,7 @@ namespace uInventory
                 return false;
             }
 
-            InventoryBaseSlot[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && slot.Item.Template.name == itemInstance.Template.name);
+            InventoryBaseSlot<TTemplate, TInstance>[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && slot.Item.Template.name == itemInstance.Template.name);
 
             int amtRemainingToRemove = itemInstance.Amount;
             foreach (var slot in slots)
@@ -100,13 +105,13 @@ namespace uInventory
         {
             foreach (var slot in ItemSlots)
             {
-                slot.SetItem (null);
+                slot.SetItemInstance (null);
             }
         }
 
-        public void FindAllItems (List<ItemInstance> items, System.Predicate<ItemInstance> predicate)
+        public void FindAllItems (List<TInstance> items, System.Predicate<TInstance> predicate)
         {
-            InventoryBaseSlot[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && predicate (slot.Item));
+            InventoryBaseSlot<TTemplate, TInstance>[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && predicate (slot.Item));
 
             foreach (var slot in slots)
             {
@@ -114,10 +119,10 @@ namespace uInventory
             }
         }
 
-        public bool HasItem (ItemInstance itemInstance)
+        public bool HasItem (TInstance itemInstance)
         {
             ItemTemplate itemTemplate = itemInstance.Template;
-            InventoryBaseSlot[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && slot.Item.Template.name == itemTemplate.name);
+            InventoryBaseSlot<TTemplate, TInstance>[] slots = Array.FindAll (ItemSlots, slot => slot.ContainsItem && slot.Item.Template.name == itemTemplate.name);
             int availableAmt = 0;
             foreach (var slot in slots)
             {
@@ -127,7 +132,7 @@ namespace uInventory
             return availableAmt >= itemInstance.Amount;
         }
 
-        private bool StackItem (ItemInstance newItem)
+        private bool StackItem (TInstance newItem)
         {
             ItemTemplate itemTemplate = newItem.Template;
 
@@ -138,7 +143,7 @@ namespace uInventory
 
             for (int i = 0; i < ItemSlots.Length; i++)
             {
-                InventoryItemSlot slot = ItemSlots[i];
+                InventoryItemSlot<TTemplate, TInstance> slot = ItemSlots[i];
                 if (slot.HasItem (newItem.Template))
                 {
                     if (slot.Item.Template == itemTemplate)
@@ -154,13 +159,13 @@ namespace uInventory
             return false;
         }
 
-        private bool AddNewItem (ItemInstance newItem)
+        private bool AddNewItem (TInstance newItem)
         {
             ItemTemplate itemTemplate = newItem.Template;
 
             for (int i = 0; i < ItemSlots.Length; i++)
             {
-                InventoryItemSlot slot = ItemSlots[i];
+                InventoryItemSlot<TTemplate, TInstance> slot = ItemSlots[i];
 
                 if (!slot.ContainsItem)
                 {
@@ -169,6 +174,7 @@ namespace uInventory
                     // @todo: auto equip
 
                     OnItemAdded (newItem);
+                    Debug.Log ("item added " + newItem.Template.name);
                     return true;
                 }
             }
