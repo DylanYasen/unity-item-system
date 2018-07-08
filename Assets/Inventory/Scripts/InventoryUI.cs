@@ -1,49 +1,51 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using uItem;
+using UnityEngine;
 using UnityEngine.Assertions;
-using uItem;
+using UnityEngine.UI;
 
 namespace uInventory
 {
-    public class InventoryUI : MonoBehaviour
+    public class InventoryUI<TTemplate, TInstance> : MonoBehaviour
+    where TTemplate : ItemTemplate, new ()
+    where TInstance : ItemInstance<TTemplate>, new ()
     {
-        [Header("[Prefabs]")]
+        [Header ("[Prefabs]")]
         public GameObject slotUIPrefab;
 
-        private Inventory inventory;
-        private InventoryUIManager inventoryManager;
+        private Inventory<TTemplate, TInstance> inventory;
+        private InventoryUIManager<TTemplate, TInstance> inventoryManager;
 
-        private void Awake()
+        private void Awake ()
         {
-            Assert.IsNotNull(slotUIPrefab, "didn't provide inventory slot prefab");
+            Assert.IsNotNull (slotUIPrefab, "didn't provide inventory slot prefab");
         }
 
-        public void SetInventory(Inventory inventory, InventoryUIManager inventoryManager)
+        public void SetInventory (Inventory<TTemplate, TInstance> inventory, InventoryUIManager<TTemplate, TInstance> inventoryManager)
         {
-            Assert.IsNotNull(inventory, "null inventory is passed to inventory ui");
-            Assert.IsNotNull(inventoryManager, "null inventory manager is passed to inventory ui");
+            Assert.IsNotNull (inventory, "null inventory is passed to inventory ui");
+            Assert.IsNotNull (inventoryManager, "null inventory manager is passed to inventory ui");
 
             this.inventory = inventory;
             this.inventoryManager = inventoryManager;
-            InitSlots();
+            InitSlots ();
         }
 
-        private void InitSlots()
+        private void InitSlots ()
         {
-            Assert.IsNotNull(inventory, "can't initialize inventory ui without inventory model");
+            Assert.IsNotNull (inventory, "can't initialize inventory ui without inventory model");
 
             // initialize item slots
             for (int i = 0; i < inventory.SlotCount; i++)
             {
-                InventoryItemSlot slot = inventory.ItemSlots[i];
+                InventoryItemSlot<TTemplate, TInstance> slot = inventory.ItemSlots[i];
 
-                InventoryItemSlotUI slotUI = Instantiate(slotUIPrefab, transform).GetComponent<InventoryItemSlotUI>();
-                slotUI.SetSlot(slot);
-                RegisterUIEvents(slotUI);
+                InventoryItemSlotUI<TTemplate, TInstance> slotUI = Instantiate (slotUIPrefab, transform).GetComponent<InventoryItemSlotUI<TTemplate, TInstance>> ();
+                slotUI.SetSlot (slot);
+                RegisterUIEvents (slotUI);
             }
         }
 
-        private void RegisterUIEvents(InventoryBaseSlotUI slotUI)
+        private void RegisterUIEvents (InventoryBaseSlotUI<TTemplate, TInstance> slotUI)
         {
             slotUI.OnLeftClickSlot += LeftClickSlot;
             slotUI.OnRightClickSlot += RightClickSlot;
@@ -52,17 +54,17 @@ namespace uInventory
             slotUI.OnMouseExitSlot += MouseExitSlot;
         }
 
-        private void MouseEnterSlot(InventoryBaseSlot slot)
+        private void MouseEnterSlot (InventoryBaseSlot<TTemplate, TInstance> slot)
         {
             // @todo: hover
         }
 
-        private void MouseExitSlot(InventoryBaseSlot slot)
+        private void MouseExitSlot (InventoryBaseSlot<TTemplate, TInstance> slot)
         {
             // @todo: unhover
         }
 
-        private void LeftClickSlot(InventoryBaseSlot slot)
+        private void LeftClickSlot (InventoryBaseSlot<TTemplate, TInstance> slot)
         {
             // @todo: consume, equip, etc
 
@@ -71,18 +73,16 @@ namespace uInventory
                 // swap item with dragged slot if they are different items. otherwise, we might be able to stack them
                 if (slot.ContainsItem && slot.Item.Template != inventoryManager.DraggedItem.Template)
                 {
-                    inventoryManager.DraggedSlot.SetItemInstance(slot.Item);
+                    inventoryManager.DraggedSlot.SetItemInstance (slot.Item);
                 }
 
-                inventoryManager.PutDraggedItem(slot);
+                inventoryManager.PutDraggedItem (slot);
             }
         }
 
-        private void RightClickSlot(InventoryBaseSlot slot)
-        {
-        }
+        private void RightClickSlot (InventoryBaseSlot<TTemplate, TInstance> slot) { }
 
-        private void DragSlot(InventoryBaseSlot slot)
+        private void DragSlot (InventoryBaseSlot<TTemplate, TInstance> slot)
         {
             if (inventoryManager.IsDraggingItem)
             {
@@ -92,7 +92,7 @@ namespace uInventory
             {
                 if (!slot.ContainsItem) { return; }
 
-                inventoryManager.SetDraggedItem(slot);
+                inventoryManager.SetDraggedItem (slot);
             }
         }
     }

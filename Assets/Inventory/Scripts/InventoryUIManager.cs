@@ -5,57 +5,59 @@ using UnityEngine.UI;
 
 namespace uInventory
 {
-    public class InventoryUIManager : MonoBehaviour
+    public class InventoryUIManager<TTemplate, TInstance> : MonoBehaviour
+    where TTemplate : ItemTemplate, new ()
+    where TInstance : ItemInstance<TTemplate>, new ()
     {
-        public bool IsDraggingItem { get { return !DraggedItem.IsEmpty(); } }
-        public InventoryBaseSlot DraggedSlot { get; private set; }
+        public bool IsDraggingItem { get { return (DraggedItem != null && !DraggedItem.IsEmpty ()); } }
+        public InventoryBaseSlot<TTemplate, TInstance> DraggedSlot { get; private set; }
 
-        [Header("[UI]")]
+        [Header ("[UI]")]
         public Image dragItemImage;
 
-        public ItemInstance DraggedItem; 
+        public TInstance DraggedItem;
         private Canvas canvas;
 
-        private void Awake()
+        private void Awake ()
         {
-            canvas = transform.GetComponent<Canvas>();
+            canvas = transform.GetComponent<Canvas> ();
 
-            Assert.IsNotNull(dragItemImage, "didn't provide dragItemImage");
+            Assert.IsNotNull (dragItemImage, "didn't provide dragItemImage");
             dragItemImage.enabled = false;
         }
 
-        public void SetDraggedItem(InventoryBaseSlot draggedSlot)
+        public void SetDraggedItem (InventoryBaseSlot<TTemplate, TInstance> draggedSlot)
         {
             DraggedSlot = draggedSlot;
             DraggedItem = draggedSlot.Item;
 
-            draggedSlot.SetItem(null);
+            draggedSlot.SetItemInstance (null);
 
             dragItemImage.sprite = DraggedItem.Template.icon;
             dragItemImage.enabled = true;
         }
 
-        public void PutDraggedItem(InventoryBaseSlot slot)
+        public void PutDraggedItem (InventoryBaseSlot<TTemplate, TInstance> slot)
         {
-            if (slot.SetItemInstance(DraggedItem))
+            if (slot.SetItemInstance (DraggedItem))
             {
-                DraggedItem.Clear();
+                DraggedItem = null;
                 DraggedSlot = null;
                 dragItemImage.enabled = false;
             }
         }
 
-        private void Update()
+        private void Update ()
         {
             if (IsDraggingItem)
             {
                 Vector3 pos = Input.mousePosition;
-                dragItemImage.transform.position = new Vector2(pos.x, pos.y);
+                dragItemImage.transform.position = new Vector2 (pos.x, pos.y);
 
                 // put back item that's currently being dragged
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown (1))
                 {
-                    PutDraggedItem(DraggedSlot);
+                    PutDraggedItem (DraggedSlot);
                 }
             }
         }

@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace uItem
 {
-    public class ItemInstance
+    public class ItemInstance<T> where T : ItemTemplate, new ()
     {
-        public ItemTemplate Template;
+        public T Template;
         public int Amount;
 
-        public ItemInstance (ItemTemplate template, int amount)
+        public ItemInstance () { }
+
+        public ItemInstance (T template, int amount)
         {
             Template = template;
             Amount = amount;
@@ -18,12 +20,6 @@ namespace uItem
         public bool IsEmpty ()
         {
             return Template == null || Amount < 1;
-        }
-
-        public void Clear ()
-        {
-            Template = null;
-            Amount = 0;
         }
     }
 }

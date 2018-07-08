@@ -5,22 +5,24 @@ using UnityEngine.Assertions;
 
 namespace uInventory
 {
-    public abstract class InventoryBaseSlot
+    public abstract class InventoryBaseSlot<TTemplate, TInstance>
+        where TTemplate : ItemTemplate, new ()
+    where TInstance : ItemInstance<TTemplate>, new ()
     {
-        public bool ContainsItem { get { return itemInstance.Template != null && itemInstance.Amount > 0; } }
-        public ItemInstance Item { get { return itemInstance; } }
-        public Inventory OwningInventory { get; private set; }
+        public bool ContainsItem { get { return itemInstance != null && itemInstance.Amount > 0; } }
+        public TInstance Item { get { return itemInstance; } }
+        public Inventory<TTemplate, TInstance> OwningInventory { get; private set; }
 
-        public event Inventory.ItemChangedDelegate OnItemChanged = delegate { };
+        public event Inventory<TTemplate, TInstance>.ItemChangedDelegate OnItemChanged = delegate { };
 
-        protected ItemInstance itemInstance; // { get; protected set; }
+        protected TInstance itemInstance; // { get; protected set; }
 
-        public InventoryBaseSlot (Inventory inventory)
+        public InventoryBaseSlot (Inventory<TTemplate, TInstance> inventory)
         {
             OwningInventory = inventory;
         }
 
-        public virtual bool SetItem (ItemTemplate itemTemplate, int amount = 0)
+        public virtual bool SetItem (TTemplate itemTemplate, int amount = 0)
         {
             itemInstance.Template = itemTemplate;
             itemInstance.Amount = amount;
@@ -30,15 +32,16 @@ namespace uInventory
             return true;
         }
 
-        // public virtual bool SetItem (Item item, int amount = 0)
-
-        public virtual bool SetItemInstance (ItemInstance itemInstance)
+        public virtual bool SetItemInstance (TInstance itemInstance)
         {
-            ItemTemplate template = itemInstance.Template;
-            if(template == Item.Template && template.IsStackable)
+            if (itemInstance != null)
             {
-                StackItem(itemInstance.Amount);
-                return true;
+                TTemplate template = itemInstance.Template;
+                if (ContainsItem && template == Item.Template && template.IsStackable)
+                {
+                    StackItem (itemInstance.Amount);
+                    return true;
+                }
             }
 
             this.itemInstance = itemInstance;
@@ -55,7 +58,7 @@ namespace uInventory
             OnItemChanged (itemInstance);
         }
 
-        public virtual bool HasItem (ItemTemplate template)
+        public virtual bool HasItem (TTemplate template)
         {
             return (ContainsItem && Item.Template == template);
         }
@@ -69,7 +72,7 @@ namespace uInventory
             itemInstance.Amount -= amt;
             if (itemInstance.Amount < 1)
             {
-                itemInstance.Clear();
+                itemInstance = null;
             }
             OnItemChanged (itemInstance);
 

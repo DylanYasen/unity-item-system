@@ -7,27 +7,29 @@ using UnityEngine.UI;
 namespace uInventory
 {
     [RequireComponent (typeof (Image))]
-    public abstract class InventoryBaseSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler
+    public abstract class InventoryBaseSlotUI<TTemplate, TInstance> : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler
+    where TTemplate : ItemTemplate, new ()
+    where TInstance : ItemInstance<TTemplate>, new ()
     {
-        public delegate void SlotInteractionDelegate (InventoryBaseSlot slot);
+        public delegate void SlotInteractionDelegate (InventoryBaseSlot<TTemplate, TInstance> slot);
         public event SlotInteractionDelegate OnLeftClickSlot = delegate { };
         public event SlotInteractionDelegate OnRightClickSlot = delegate { };
         public event SlotInteractionDelegate OnMouseEnterSlot = delegate { };
         public event SlotInteractionDelegate OnMouseExitSlot = delegate { };
         public event SlotInteractionDelegate OnMouseDragSlot = delegate { };
 
-        protected InventoryBaseSlot slot;
+        protected InventoryBaseSlot<TTemplate, TInstance> slot;
 
         public Image BackgroundImage;
         public Image ItemImage;
 
         protected virtual void Awake ()
         {
-            BackgroundImage = GetComponent<Image>();
-            ItemImage = gameObject.transform.Find("ItemImage").GetComponent<Image>();
+            BackgroundImage = GetComponent<Image> ();
+            ItemImage = gameObject.transform.Find ("ItemImage").GetComponent<Image> ();
 
-            Assert.IsNotNull(BackgroundImage, "Inventory slot doesn't have an image component");
-            Assert.IsNotNull(ItemImage, "Inventory slot doesn't have a child component called 'ItemImage' with image component");
+            Assert.IsNotNull (BackgroundImage, "Inventory slot doesn't have an image component");
+            Assert.IsNotNull (ItemImage, "Inventory slot doesn't have a child component called 'ItemImage' with image component");
 
             ItemImage.enabled = false;
         }
@@ -41,7 +43,7 @@ namespace uInventory
             }
         }
 
-        public virtual void SetSlot (InventoryBaseSlot slot)
+        public virtual void SetSlot (InventoryBaseSlot<TTemplate, TInstance> slot)
         {
             Assert.IsNotNull (slot, "null inventory slot model is passed to inventory slot ui");
 
@@ -49,9 +51,9 @@ namespace uInventory
             this.slot.OnItemChanged += UpdateUI;
         }
 
-        protected virtual void UpdateUI(ItemInstance Item)
+        protected virtual void UpdateUI (TInstance Item)
         {
-            if (Item.Template != null)
+            if (Item != null)
             {
                 ItemImage.sprite = Item.Template.icon;
                 ItemImage.enabled = true;
