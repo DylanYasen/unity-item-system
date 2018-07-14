@@ -132,6 +132,15 @@ namespace uInventory
             return availableAmt >= itemInstance.Amount;
         }
 
+        public bool IsFull ()
+        {
+            for (int i = 0; i < SlotCount; i++)
+            {
+                if (!ItemSlots[i].ContainsItem) { return false; }
+            }
+            return true;
+        }
+
         private bool StackItem (TInstance newItem)
         {
             ItemTemplate itemTemplate = newItem.Template;
