@@ -15,7 +15,7 @@ namespace Demo
 
         void Start()
         {
-            inventory = new Inventory<ItemTemplate, ItemInstance<ItemTemplate>>(gameObject, 12);
+            inventory = new Inventory<ItemTemplate, ItemInstance<ItemTemplate>>(gameObject, ItemTemplateManager.Instance, 12);
             inventoryUI.SetInventory(inventory, inventoryUIManager);
             inventory.AddItem("Unicorn Icecream", 4);
             inventory.AddItem("Icecream", 4);

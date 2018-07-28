@@ -19,11 +19,13 @@ namespace uInventory
         public event ItemChangedDelegate OnItemAdded = delegate { };
 
         private GameObject owner;
+        private DataTemplateManager<TTemplate> dataTempateManager;
 
-        public Inventory(GameObject inOwner, int slotCount)
+        public Inventory(GameObject inOwner, DataTemplateManager<TTemplate> templateManager, int slotCount)
         {
             this.owner = inOwner;
             this.SlotCount = slotCount;
+            this.dataTempateManager = templateManager;
 
             // initialize item slots
             ItemSlots = new InventoryItemSlot<TTemplate, TInstance>[slotCount];
@@ -41,7 +43,7 @@ namespace uInventory
 
         public void AddItem(string name, int amount = 1)
         {
-            TTemplate itemTemplate = (TTemplate)ItemTemplateManager.Instance.FindDataTemplate(name);
+            TTemplate itemTemplate = dataTempateManager.FindDataTemplate(name);
             Debug.Log(itemTemplate);
             if (itemTemplate != null)
             {
