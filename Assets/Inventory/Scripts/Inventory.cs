@@ -86,7 +86,7 @@ namespace uInventory
         {
             if (!HasItem(itemInstance))
             {
-                Debug.LogErrorFormat("don't have %d $s to remove", itemInstance.Amount, itemInstance.Template.name);
+                Debug.Log($"don't have {itemInstance.Amount} {itemInstance.Template.name} to remove");
                 return false;
             }
 
