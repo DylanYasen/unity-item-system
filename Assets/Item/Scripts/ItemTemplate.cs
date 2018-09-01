@@ -5,7 +5,7 @@ using UnityEngine;
 namespace uItem
 {
     [CreateAssetMenu]
-    public class ItemTemplate : ScriptableObject
+    public class ItemTemplate : DataTemplate
     {
         [Flags]
         public enum ItemProperty
