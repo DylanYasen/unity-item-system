@@ -1,0 +1,10 @@
+
+{
+    "name": "com.iw.item-sytem",
+    "displayName": "Item System",
+    "version": "1.0",
+    "unity": "2018.3",
+    "description": "data driven item system && event driven UI",
+    "keywords": [],
+    "category": "Unity"
+}
