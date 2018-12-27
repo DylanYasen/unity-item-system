@@ -1,7 +1,12 @@
 {
   "dependencies": {
-    "com.unity.package-manager-ui": "2.0.3",
-    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.iw.data-template-sytem": "https://github.com/DylanYasen/unity-data-template-system.git",
     "com.unity.modules.ui": "1.0.0"
+  },
+  "lock": {
+    "com.iw.data-template-sytem": {
+      "hash": "11f096cfee3c02d49f731502c55b0ad5cc176520",
+      "revision": "HEAD"
+    }
   }
 }
